@@ -10,6 +10,9 @@ const reducer = (state, action) => {
       return { ...state, dentist: action.payload };
 
     case "ADD_FAVS":
+       if (state.fav.some(fav => fav.id === action.payload.id)) {
+        return state;
+      }
       return { ...state, fav: [...state.fav, action.payload] };
     
     case "DELETE_FAVS":
@@ -40,6 +43,10 @@ const Context = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
+  useEffect(() => {
+      localStorage.setItem("fav", JSON.stringify(state.fav));
+  }, [state.fav]);
+
   const getDentist = async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/users");
     const data = await res.json();
@@ -49,6 +56,7 @@ const Context = ({children}) => {
   useEffect(() => {
     getDentist();
   }, []);
+
 
   return (
     <DentistContext.Provider value={{state, dispatch}}>

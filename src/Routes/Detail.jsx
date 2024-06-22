@@ -1,23 +1,43 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDentistContext } from "../Context/Context";
 
 const Detail = () => {
- 
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { state, dispatch } = useDentistContext();
+  const [dentistData, setDentistData] = useState(null);
 
-  //fetch clase 10 min 55
-  
-  const params = useParams()
-//el id se guarda como parametro y luego le hago un fetch con ese id
+  const getDentist = async () => {
+    try {
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}`
+      );
+      const data = await res.json();
+      setDentistData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getDentist();
+  }, [id]);
+
+  if (!dentistData) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
-      <h1>Detail Dentist id </h1>
-      {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
-      {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
+      <div>
+        <h1>Dentista numero {dentistData.id}</h1>
+        <p>Nombre: {dentistData.name}</p>
+        <p>Email: {dentistData.email}</p>
+        <p>Teléfono: {dentistData.phone}</p>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Detail
+export default Detail;

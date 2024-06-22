@@ -11,13 +11,8 @@ const Home = () => {
       <h1>Home</h1>
       <div className="card-grid">
         {state.dentist.length &&
-          state.dentist.map((beer) => (
-            <Card data={beer} key={beer.id}>
-              <button
-                onClick={() => dispatch({ type: "ADD_CART", payload: beer })}>
-                🛒
-              </button>
-            </Card>
+          state.dentist.map((dentists) => (
+            <Card data={dentists} key={dentists.id}/>
           ))}
       </div>
     </main>

@@ -5,11 +5,15 @@ import Contact  from "./Routes/Contact"
 import Favs from "./Routes/Favs"
 import Detail from "./Routes/Detail"
 import Layout from "./Layout/Layout.jsx";
+import { useDentistContext } from "./Context/Context.jsx";
 
 
 function App() {
+
+  const { state } = useDentistContext();
+  
   return (
-    <div className="App">
+    <div className={state.theme === "dark" ? "dark" : "light"}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path={routes.home} element={<Home />} />

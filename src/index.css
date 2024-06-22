@@ -23,11 +23,22 @@ h1{
   text-align: center;
 }
 
+/*Navbar styles*/
+.container-navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 10%;
+}
+.container-navbar-logo{
+height: 3rem;
+}
+
 nav{
   display: flex;
-  width: 80vw;
-  justify-content: flex-start;
-  padding: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 10px;
 }
 
 a{
@@ -35,10 +46,30 @@ a{
   text-decoration: none;
   margin: 5px;
   cursor: pointer;
+  padding: 0rem .5rem;
 }
 a:hover{
   color: rgb(136, 136, 136);
-} 
+}
+.navbar-button{
+  background-color: transparent;
+  border: 0px;
+}
+.image-back{
+  width: 30px;
+  height: 25px;
+
+}
+.image-back:hover{
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.dark-mode{
+  width: 30px;
+  height: 30px;
+}
+
 
 footer {
   display: flex;
@@ -77,7 +108,8 @@ form{
   align-items: center;
   width: 200px;
   padding: 0.5rem 0.5rem 0 0.5rem;
-  border: 0.5px solid rgb(136, 136, 136);
+  border: 0.5px solid rgb(199, 199, 199);
+  border-radius: 5%;
 }
 
 .card:hover{
@@ -119,4 +151,39 @@ tr:nth-child(even) {
 }
 .dark > a {
   color: white;
+}
+
+/*card styles*/
+.card-container-images{
+  position: relative;
+}
+
+.card-container-doctor{
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.card-container-button{
+  border: none;
+  background-color: transparent;
+}
+.transparent-liked {
+  width: 40px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  background-color: rgba(240, 248, 255, 0.431);
+  border-radius: 50px;
+  
+}
+
+.liked {
+  width: 40px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  
+  
 }

@@ -1,26 +1,51 @@
 import React from "react";
+import image from "/public/images/doctor.jpg";
+import tHeart from "/public/gheart.png";
+import Heart from "../../public/images/heart.png"
+import { Link, useLocation } from "react-router-dom";
+import { useDentistContext } from "../Context/Context"
+
+const Card = ({ data }) => {
+
+  const { dispatch } = useDentistContext()
+  const location = useLocation();
 
 
-const Card = ({ name, username, id }) => {
+    const handleAddFav = () => {
+      dispatch({ type: "ADD_FAVS", payload: data });
+    };
 
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-  }
+    const handleDeleteFav = () => {
+      dispatch({ type: "DELETE_FAVS", payload: data });
+    };
 
   return (
     <div className="card">
-      {/* En cada card deberan mostrar en name - username y el id */}
-      <a href= { 'detail' + {id} }>
-        <img src="" alt="" />
-        <h3>Titulo del odontologo</h3>
-      </a>
-      {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
+      <div className="card-container-images">
+        <img src={image} alt="Doctor Image" className="card-container-doctor" />
 
-      {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-      <button onClick={addFav} className="favButton">
-        Add fav
-      </button>
-      {/*en este componenete tambien debo de tenr una funcionalidad para eliminar*/}
+        {location.pathname == "/" ? (
+          <button className="card-container-button" onClick={handleAddFav}>
+            <img
+              src={tHeart}
+              alt="Heart transparent"
+              className="transparent-liked"
+            />
+          </button>
+        ) : (
+          <button className="card-container-button" onClick={handleDeleteFav}>
+            <img 
+              src={Heart} 
+              alt="Heart" 
+              className="transparent-liked" 
+            />
+          </button>
+        )}
+      </div>
+      <Link to={"/detail/" + data.id}>
+        <h3>{data.name}</h3>
+        <p>{data.id}</p>
+      </Link>
     </div>
   );
 };
